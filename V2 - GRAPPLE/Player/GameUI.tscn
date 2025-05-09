@@ -1,0 +1,145 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbbay4ue6dqql"]
+
+[sub_resource type="GDScript" id="GDScript_ag486"]
+script/source = "extends Control
+
+# References to UI elements
+@onready var health_bar = $HealthContainer/HealthBar
+@onready var health_text = $HealthContainer/HealthText
+@onready var dash_bar = $DashContainer/DashBar
+@onready var dash_icons_container = $DashContainer/DashIcons
+@onready var dash_cooldown_indicator = $DashContainer/CooldownIndicator
+
+# Reference to the player
+var player: MovementController
+
+# Dash icon textures
+@export var dash_available_texture: Texture2D
+@export var dash_used_texture: Texture2D
+
+# Health parameters
+@export var max_health := 100.0
+var current_health := max_health
+
+# Array to store dash icons
+var dash_icons = []
+
+# Colors
+var health_color_full := Color(0.2, 0.8, 0.2)  # Green
+var health_color_mid := Color(0.9, 0.9, 0.2)   # Yellow
+var health_color_low := Color(0.9, 0.2, 0.2)   # Red
+var dash_color := Color(0.2, 0.6, 1.0)         # Blue
+var dash_cooldown_color := Color(0.5, 0.5, 0.5, 0.7) # Gray, semi-transparent
+
+func _ready():
+	# Find the player node
+	player = get_tree().get_nodes_in_group(\"player\")[0] if get_tree().get_nodes_in_group(\"player\").size() > 0 else null
+	
+	if player:
+		# Initialize dash icons if using icon mode
+		if dash_available_texture and dash_used_texture:
+			for i in range(player.max_dashes):
+				var icon = TextureRect.new()
+				icon.texture = dash_available_texture
+				icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+				icon.custom_minimum_size = Vector2(32, 32)
+				icon.modulate = dash_color
+				dash_icons_container.add_child(icon)
+				dash_icons.append(icon)
+			
+			# Hide the dash bar if using icons
+			dash_bar.visible = false
+		else:
+			# Configure dash bar if using bar mode
+			dash_bar.max_value = player.max_dashes
+			dash_bar.value = player.max_dashes
+			dash_bar.tint_progress = dash_color
+			
+			# Hide the icons container
+			dash_icons_container.visible = false
+		
+		# Initialize health bar
+		health_bar.max_value = max_health
+		health_bar.value = current_health
+		update_health_text()
+		update_health_color()
+
+func _process(delta):
+	if player:
+		update_dash_ui()
+		
+		# For testing, you can simulate health changes with key presses
+		if Input.is_action_just_pressed(\"ui_up\"):
+			change_health(10)
+		if Input.is_action_just_pressed(\"ui_down\"):
+			change_health(-10)
+
+func update_dash_ui():
+	# Update dash icons or bar
+	if dash_icons.size() > 0:
+		# Icon mode
+		for i in range(dash_icons.size()):
+			if i < player.dash_count:
+				dash_icons[i].texture = dash_available_texture
+				dash_icons[i].modulate = dash_color
+			else:
+				dash_icons[i].texture = dash_used_texture
+				dash_icons[i].modulate = dash_cooldown_color
+	else:
+		# Bar mode
+		dash_bar.value = player.dash_count
+	
+	# Update cooldown indicator
+	if !player.can_dash and player.dash_count < player.max_dashes:
+		var cooldown_percent = player.dash_cooldown_timer / player.dash_cooldown
+		dash_cooldown_indicator.value = cooldown_percent * 100
+		dash_cooldown_indicator.visible = true
+	else:
+		dash_cooldown_indicator.visible = false
+	
+	# Show recharge progress on the last used dash icon
+	if player.dash_count < player.max_dashes and dash_icons.size() > 0:
+		var recharge_icon_index = player.dash_count
+		if recharge_icon_index < dash_icons.size():
+			var recharge_percent = player.dash_recharge_timer / player.dash_recharge_time
+			# You could visualize this with a shader or overlay
+
+func change_health(amount):
+	var old_health = current_health
+	current_health = clamp(current_health + amount, 0, max_health)
+	
+	# Animate health change
+	var tween = create_tween()
+	tween.tween_property(health_bar, \"value\", current_health, 0.3)
+	
+	# Update text and color
+	update_health_text()
+	update_health_color()
+	
+	# Flash effect if taking damage
+	if amount < 0:
+		var flash_tween = create_tween()
+		flash_tween.tween_property(health_bar, \"modulate\", Color(1, 1, 1, 0.7), 0.1)
+		flash_tween.tween_property(health_bar, \"modulate\", Color(1, 1, 1, 1.0), 0.1)
+
+func update_health_text():
+	health_text.text = str(int(current_health)) + \"/\" + str(int(max_health))
+
+func update_health_color():
+	var health_ratio = current_health / max_health
+	var bar_color
+	
+	if health_ratio > 0.6:
+		bar_color = health_color_full
+	elif health_ratio > 0.3:
+		bar_color = health_color_mid
+	else:
+		bar_color = health_color_low
+	
+	health_bar.tint_progress = bar_color
+"
+
+[node name="GameUi" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("GDScript_ag486")

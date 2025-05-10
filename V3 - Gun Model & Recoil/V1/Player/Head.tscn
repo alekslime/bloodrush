@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8drbos167vf8"]
+
+[ext_resource type="Script" uid="uid://cggw6eoflyj02" path="res://Player/Head.gd" id="1_enjfg"]
+[ext_resource type="PackedScene" uid="uid://vsl08kw81yu" path="res://Player/gun.tscn" id="2_irtxf"]
+
+[node name="Head" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64, 0)
+script = ExtResource("1_enjfg")
+
+[node name="Camera" type="Camera3D" parent="."]
+current = true
+
+[node name="GrappleRaycast" type="RayCast3D" parent="Camera"]
+target_position = Vector3(0, 0, -100)
+
+[node name="Gun" parent="Camera" instance=ExtResource("2_irtxf")]
+transform = Transform3D(-8.51028e-09, 0, 0.194692, 0, 0.194692, 0, -0.194692, 0, -8.51028e-09, 0.478773, -0.681476, -0.14012)

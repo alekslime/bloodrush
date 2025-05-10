@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://060us0v31dss"]
+
+[ext_resource type="Script" uid="uid://yynrwo5i0v20" path="res://Player/muzzle_flash.gd" id="1_0jlsr"]
+
+[node name="MuzzleFlash" type="Node3D"]
+script = ExtResource("1_0jlsr")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]

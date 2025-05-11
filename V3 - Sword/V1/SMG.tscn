@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://hdgvacmfrum3"]
+
+[ext_resource type="PackedScene" uid="uid://bt0d5ffpod4g5" path="res://Models/Scifi Smg.glb" id="1_c0pgd"]
+
+[node name="Root Scene" instance=ExtResource("1_c0pgd")]

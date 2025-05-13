@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://il7kifyli0l8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_2kogg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mcm0j"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2kogg"]
+
+[node name="Enemy" type="Area3D" groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01512, -0.0119812, -0.000801086)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1.99066, 0, 0, 0, 1.99066, 0, 0, 0, 1.99066, 0, 0, 0)
+mesh = SubResource("SphereMesh_2kogg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(2.09916, 0, 0, 0, 2.09916, 0, 0, 0, 2.09916, 0, 0, 0)
+shape = SubResource("SphereShape3D_mcm0j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.00389, 0, 0, 0, 1.00389, 0, 0, 0, 1.00389, 0, 0, 0)
+shape = SubResource("SphereShape3D_2kogg")

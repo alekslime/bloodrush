@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8vdnmuuea07h"]
+
+[ext_resource type="Script" uid="uid://do5hk7fpawngk" path="res://Player/visual_effects.gd" id="1_p8t1h"]
+
+[node name="VisualEffects" type="Node3D"]
+script = ExtResource("1_p8t1h")

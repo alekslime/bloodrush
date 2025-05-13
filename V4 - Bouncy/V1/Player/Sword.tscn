@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d347k6cx32oh6"]
+
+[ext_resource type="Script" uid="uid://xmapk288wcnn" path="res://Player/sword.gd" id="1_8vkwk"]
+[ext_resource type="PackedScene" uid="uid://cj7ljt6wp3po5" path="res://weapons/medieval_sword.glb" id="2_qnnj7"]
+
+[node name="Sword" type="Node3D"]
+script = ExtResource("1_8vkwk")
+
+[node name="Sword" parent="." instance=ExtResource("2_qnnj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00189638, 0, -0.0399952)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sword"]

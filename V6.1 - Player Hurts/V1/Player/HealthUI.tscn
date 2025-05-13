@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://nkvlc0bwh7ny"]
+
+[ext_resource type="Script" uid="uid://dwvx51ba8sfjg" path="res://Player/health_display.gd" id="1_1ptlg"]
+
+[node name="HealthUi" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1ptlg")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 27.0
+
+[node name="HealthLabel" type="Label" parent="HealthBar"]
+layout_mode = 0
+offset_right = 103.0
+offset_bottom = 26.0

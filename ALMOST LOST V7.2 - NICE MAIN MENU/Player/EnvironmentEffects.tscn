@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0alsamqxp8jj"]
+
+[ext_resource type="Script" uid="uid://42vx43v383oi" path="res://Player/environment_effects.gd" id="1_vjo5e"]
+
+[sub_resource type="Environment" id="Environment_2cnxs"]
+
+[node name="EnvironmentEffects" type="Node3D"]
+script = ExtResource("1_vjo5e")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2cnxs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]

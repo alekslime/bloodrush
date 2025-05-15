@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqtjddphvnaaj"]
+
+[ext_resource type="Script" uid="uid://kiaa1k804nix" path="res://Player/main_menu.gd" id="1_71wd4"]
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_71wd4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="MenuBackground" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MenuBackground"]
+
+[node name="Camera3D" type="Camera3D" parent="MenuBackground"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MenuContainer" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleContainer" type="VBoxContainer" parent="UI/MenuContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Game Title" type="Label" parent="UI/MenuContainer/TitleContainer"]
+layout_mode = 2
+
+[node name="Subtitle" type="Label" parent="UI/MenuContainer/TitleContainer"]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="UI/MenuContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartButton" type="Button" parent="UI/MenuContainer/ButtonsContainer"]
+layout_mode = 2
+
+[node name="OptionsButton" type="Button" parent="UI/MenuContainer/ButtonsContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="UI/MenuContainer/ButtonsContainer"]
+layout_mode = 2
+
+[node name="VersionLabel" type="Label" parent="UI/MenuContainer"]
+layout_mode = 0
+offset_right = 698.0
+offset_bottom = 311.0
+
+[node name="OptionsMenu" type="Control" parent="UI/MenuContainer"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

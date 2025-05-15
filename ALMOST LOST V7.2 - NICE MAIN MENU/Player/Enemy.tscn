@@ -1,0 +1,77 @@
+[gd_scene load_steps=15 format=3 uid="uid://cnq1c3r1tceu5"]
+
+[ext_resource type="Script" uid="uid://d16mpwwf74t6h" path="res://Player/enemy.gd" id="1_mcm0j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mcm0j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nr0dk"]
+albedo_color = Color(0.7, 0.154, 0.154, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nxmrh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nx8t7"]
+
+[sub_resource type="Animation" id="Animation_vnwf6"]
+resource_name = "alert"
+
+[sub_resource type="Animation" id="Animation_u1ert"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_bvouu"]
+resource_name = "death"
+
+[sub_resource type="Animation" id="Animation_a5fgx"]
+resource_name = "hit"
+
+[sub_resource type="Animation" id="Animation_qp4pf"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_nek54"]
+resource_name = "run"
+
+[sub_resource type="Animation" id="Animation_xfuap"]
+resource_name = "stunend"
+
+[sub_resource type="Animation" id="Animation_5alsf"]
+resource_name = "walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmhco"]
+_data = {
+&"alert": SubResource("Animation_vnwf6"),
+&"attack": SubResource("Animation_u1ert"),
+&"death": SubResource("Animation_bvouu"),
+&"hit": SubResource("Animation_a5fgx"),
+&"idle": SubResource("Animation_qp4pf"),
+&"run": SubResource("Animation_nek54"),
+&"stunned": SubResource("Animation_xfuap"),
+&"walk": SubResource("Animation_5alsf")
+}
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_mcm0j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["player_weapon"]]
+transform = Transform3D(1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_mcm0j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_nr0dk")
+mesh = SubResource("CapsuleMesh_nxmrh")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="DetectionArea" type="Area3D" parent="." groups=["player_weapon"]]
+
+[node name="HitArea" type="Area3D" parent="." groups=["player_weapon"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" groups=["player_weapon"]]
+transform = Transform3D(1.2, 0, 0, 0, 2.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_nx8t7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kmhco")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." groups=["player_weapon"]]

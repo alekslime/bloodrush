@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2rsrq5nhi4hp"]
+
+[ext_resource type="Script" uid="uid://de6q5j42xxs5r" path="res://Player/wave_manager.gd" id="1_5ap0b"]
+[ext_resource type="PackedScene" uid="uid://cnq1c3r1tceu5" path="res://Player/Enemy.tscn" id="2_rfmwd"]
+[ext_resource type="PackedScene" uid="uid://dnqpl35cq6cd1" path="res://Player/wave_ui.tscn" id="3_vbsdn"]
+
+[node name="WaveManager" type="Node" groups=["wave_manager"]]
+script = ExtResource("1_5ap0b")
+enemies_per_wave = 4
+enemy_increase_per_wave = 4
+max_enemies_per_wave = 99999
+enemy_scenes = Array[PackedScene]([ExtResource("2_rfmwd"), ExtResource("2_rfmwd"), ExtResource("2_rfmwd"), ExtResource("2_rfmwd"), ExtResource("2_rfmwd")])
+
+[node name="WaveUi" parent="." instance=ExtResource("3_vbsdn")]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnqpl35cq6cd1"]
+
+[ext_resource type="Script" uid="uid://bx4osskv4iyt8" path="res://Player/wave_ui.gd" id="1_0ilmc"]
+
+[node name="WaveUi" type="CanvasLayer"]
+script = ExtResource("1_0ilmc")
+
+[node name="WaveLabel" type="Label" parent="."]
+offset_left = 802.0
+offset_top = 374.0
+offset_right = 842.0
+offset_bottom = 397.0
+
+[node name="EnemyCountLabel" type="Label" parent="."]
+offset_left = 754.0
+offset_top = 452.0
+offset_right = 794.0
+offset_bottom = 475.0
+
+[node name="WaveAnnouncement" type="Label" parent="."]
+offset_left = 166.0
+offset_top = 396.0
+offset_right = 206.0
+offset_bottom = 419.0
+
+[node name="TimerLabel" type="Label" parent="."]
+offset_left = 547.0
+offset_top = 552.0
+offset_right = 587.0
+offset_bottom = 575.0
